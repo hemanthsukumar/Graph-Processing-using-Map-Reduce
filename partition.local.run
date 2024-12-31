@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -A uot195
+#SBATCH --job-name="partition.local"
+#SBATCH --output="partition.local.out"
+#SBATCH --partition=debug
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --mem=16G
+#SBATCH --export=ALL 
+#SBATCH --time=29
+
+module load cpu/0.15.4 gcc/7.5.0 openjdk hadoop/3.2.2
+SW=/expanse/lustre/projects/uot195/fegaras
+export TMPDIR=$HOME/tmp
+
+rm -rf tmp output
+hadoop --config  $SW/conf jar partition.jar GraphPartition small-graph.txt tmp output
+
+// print the result to the output
+cat output/part-r-*
+
+# need to delete this directory to allow other users to submit map-reduce jobs
+rm -rf /tmp/hadoop

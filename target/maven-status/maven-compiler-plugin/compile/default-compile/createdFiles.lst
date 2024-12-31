@@ -1,0 +1,7 @@
+GraphPartition$GraphReaderMapper.class
+GraphPartition$ClusterSizeMapper.class
+GraphPartition$ClusterSizeReducer.class
+GraphPartition$BFSReducer.class
+GraphPartition$BFSMapper.class
+GraphPartition.class
+VertexWritable.class
